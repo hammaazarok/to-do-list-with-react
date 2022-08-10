@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "./TodoItem.module.css";
+import { FaTrash } from "react-icons/fa"
+import { useEffect } from "react";
 function TodoItem(props) {
   const edit = {
     editing: false,
@@ -26,6 +28,11 @@ function TodoItem(props) {
       handleEditing({ editing: false })
     }
   };
+  useEffect(() => {
+    return () => {
+      console.log("Cleaning up...")
+    }
+  }, [])
   return (
     <li className={styles.item}>
       <div
@@ -38,7 +45,7 @@ function TodoItem(props) {
           onChange={() => props.handleChangeProps(id)}
         />
         <span style={completed ? completedStyle : null}>{title}</span>
-        <button onClick={() => props.deleteTodoProps(id)}>Delete</button>
+        <button onClick={() => props.deleteTodoProps(id)}><FaTrash style={{ color: "orangered", fontSize: "16px" }}/></button>
       </div>
       <input
         type="text"
